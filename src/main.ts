@@ -4,7 +4,18 @@ import imagesLoaded from 'imagesloaded';
 
 import './style.css';
 
-const displacementSlider = function (opts) {
+const displacementSlider = function (opts: {
+  parent: any;
+  images: any;
+  displacementImage: any;
+  angle?: number;
+  intensity: any;
+  angle1?: any;
+  angle2?: any;
+  speedIn?: any;
+  speed?: any;
+  speedOut?: any;
+}) {
   let speed = 1.6;
   let vertex = `
         varying vec2 vUv;
@@ -130,7 +141,7 @@ void main() {
   disp.magFilter = disp.minFilter = THREE.LinearFilter;
   disp.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
-  images.forEach((img) => {
+  images.forEach((img: HTMLImageElement) => {
     image = loader.load(img.getAttribute('src') + '?v=' + Date.now());
     image.magFilter = image.minFilter = THREE.LinearFilter;
     image.anisotropy = renderer.capabilities.getMaxAnisotropy();
@@ -163,35 +174,44 @@ void main() {
 
   let mat = new THREE.ShaderMaterial({
     uniforms: {
-      dispFactor: { type: 'f', value: 0.0 },
-      currentImage: { type: 't', value: sliderImages[0] },
-      nextImage: { type: 't', value: sliderImages[1] },
+      dispFactor: {
+        //type: 'f',
+        value: 0.0,
+      },
+      currentImage: {
+        //type: 't',
+        value: sliderImages[0],
+      },
+      nextImage: {
+        //type: 't',
+        value: sliderImages[1],
+      },
       intensity1: {
-        type: 'f',
+        // type: 'f',
         value: intensity1,
       },
       intensity2: {
-        type: 'f',
+        // type: 'f',
         value: intensity2,
       },
       angle1: {
-        type: 'f',
+        // type: 'f',
         value: angle1,
       },
       angle2: {
-        type: 'f',
+        // type: 'f',
         value: angle2,
       },
       disp: {
-        type: 't',
+        // type: 't',
         value: disp,
       },
       res: {
-        type: 'vec4',
+        // type: 'vec4',
         value: new THREE.Vector4(parent.offsetWidth, parent.offsetHeight, a1, a2),
       },
       dpr: {
-        type: 'f',
+        // type: 'f',
         value: window.devicePixelRatio,
       },
     },
@@ -207,7 +227,7 @@ void main() {
   scene.add(object);
 
   let addEvents = function () {
-    let pagButtons = Array.from(document.getElementById('pagination').querySelectorAll('button'));
+    let pagButtons = Array.from(document.getElementById('pagination')!.querySelectorAll('button'));
     let isAnimating = false;
 
     pagButtons.forEach((el) => {
@@ -215,13 +235,13 @@ void main() {
         if (!isAnimating) {
           isAnimating = true;
 
-          document.getElementById('pagination').querySelectorAll('.active')[0].className = '';
+          document.getElementById('pagination')!.querySelectorAll('.active')[0].className = '';
           this.className = 'active';
 
-          let slideId = parseInt(this.dataset.slide, 10);
+          let slideId = parseInt(this.dataset.slide!, 10);
 
           mat.uniforms.nextImage.value = sliderImages[slideId];
-          mat.uniforms.nextImage.needsUpdate = true;
+          // mat.uniforms.nextImage.needsUpdate = true;
 
           gsap.to(mat.uniforms.dispFactor, {
             value: 1,
@@ -229,7 +249,7 @@ void main() {
             ease: 'Expo.easeInOut',
             onComplete: function () {
               mat.uniforms.currentImage.value = sliderImages[slideId];
-              mat.uniforms.currentImage.needsUpdate = true;
+              // mat.uniforms.currentImage.needsUpdate = true;
               mat.uniforms.dispFactor.value = 0.0;
               isAnimating = false;
             },
@@ -252,7 +272,7 @@ void main() {
               y: 20,
               ease: 'Expo.easeIn',
               onComplete: function () {
-                slideTitleEl.innerHTML = nextSlideTitle;
+                slideTitleEl!.innerHTML = nextSlideTitle;
 
                 gsap.to(slideTitleEl, 0.5, {
                   autoAlpha: 1,
@@ -274,7 +294,7 @@ void main() {
               y: 20,
               ease: 'Expo.easeIn',
               onComplete: function () {
-                slideStatusEl.innerHTML = nextSlideStatus;
+                slideStatusEl!.innerHTML = nextSlideStatus;
 
                 gsap.to(slideStatusEl, 0.5, {
                   autoAlpha: 1,
@@ -308,9 +328,9 @@ imagesLoaded(document.querySelectorAll('img'), () => {
   console.log('aaaa');
 
   const el = document.getElementById('slider');
-  const imgs = Array.from(el.querySelectorAll('img'));
+  const imgs = Array.from(el!.querySelectorAll('img'));
 
-  new displacementSlider({
+  displacementSlider({
     parent: el,
     images: imgs,
     displacementImage: '/public/testDistort.png',
