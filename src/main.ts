@@ -97,7 +97,7 @@ void main() {
     image,
     sliderImages: any[] = [];
   let canvasWidth = images[0].clientWidth;
-  let canvasHeight = images[0].clientHeight;
+  // let canvasHeight = images[0].clientHeight;
   let parent = opts.parent;
 
   let dispImage = opts.displacementImage;
@@ -106,8 +106,8 @@ void main() {
   var commonAngle = 0; //opts.angle || Math.PI / 4; // 45 degrees by default, so grayscale images work correctly
   var angle1 = opts.angle1 || commonAngle;
   var angle2 = opts.angle2 || -commonAngle * 3;
-  var speedIn = opts.speedIn || opts.speed || 1.6;
-  var speedOut = opts.speedOut || opts.speed || 1.2;
+  // var speedIn = opts.speedIn || opts.speed || 1.6;
+  // var speedOut = opts.speedOut || opts.speed || 1.2;
 
   console.log(commonAngle, angle1, angle2);
 
@@ -311,7 +311,7 @@ void main() {
 
   addEvents();
 
-  window.addEventListener('resize', function (e) {
+  window.addEventListener('resize', function () {
     renderer.setSize(renderW, renderH);
   });
 
