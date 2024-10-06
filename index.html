@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider example</title>
+  </head>
+  <body class="loading">
+    <main>
+      <div id="slider">
+        <div class="slider-inner">
+          <div id="slider-content">
+            <div class="meta">Info</div>
+            <h2 id="slide-title">Slide 1</h2>
+            <span data-slide-title="0">Slide 1</span>
+            <span data-slide-title="1">Slide 2</span>
+            <span data-slide-title="2">Slide 3</span>
+            <span data-slide-title="3">Slide 4</span>
+            <div class="meta">Status</div>
+            <div id="slide-status">Live</div>
+            <span data-slide-status="0">Live</span>
+            <span data-slide-status="1">In Production</span>
+            <span data-slide-status="2">In Planning</span>
+            <span data-slide-status="3">Concept</span>
+          </div>
+        </div>
+
+        <img src="/ice.jpg" />
+        <img src="/ice2.jpg" />
+        <img src="/ny.jpg" />
+        <img src="/ny-info.jpg" />
+
+        <div id="pagination">
+          <button class="active" data-slide="0"></button>
+          <button data-slide="1"></button>
+          <button data-slide="2"></button>
+          <button data-slide="3"></button>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
