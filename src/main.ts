@@ -333,7 +333,7 @@ imagesLoaded(document.querySelectorAll('img'), () => {
   displacementSlider({
     parent: el,
     images: imgs,
-    displacementImage: '/public/testDistort.png',
+    displacementImage: '/testDistort.png',
     angle: 0,
     intensity: 0.1,
   });
